@@ -290,23 +290,28 @@ async function sendEmails(pdfBuffer: Uint8Array, userData: { email: string; name
   const stats = getSummaryStats(answers);
   const fileName = `diagnostico-empresarial-${userData.name.replace(/\s+/g, '-').toLowerCase()}-${formattedDate.replace(/\//g, '-')}.pdf`;
 
-  // Email para o usuário
-  console.log('Sending email to user...');
+  // Email para jmarcss.rm@gmail.com com dados do usuário
+  console.log('Sending email to admin with user data...');
   await transporter.sendMail({
     from: `"Diagnóstico Empresarial" <${gmailUser}>`,
-    to: userData.email,
-    subject: `Seu Relatório de Diagnóstico Empresarial - ${formattedDate}`,
+    to: 'jmarcss.rm@gmail.com',
+    subject: `Nova Resposta do Diagnóstico - ${userData.name} - ${formattedDate}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #FF8C00;">
-          <h1 style="color: #111827; margin-bottom: 10px;">📊 Diagnóstico Empresarial Concluído!</h1>
-          <p style="color: #6b7280; font-size: 16px;">Análise da Maturidade da Gestão Financeira</p>
+          <h1 style="color: #111827; margin-bottom: 10px;">🔔 Nova Resposta do Diagnóstico</h1>
+          <p style="color: #6b7280; font-size: 16px;">Notificação do Sistema</p>
         </div>
         
-        <p style="color: #374151; margin-bottom: 20px;">Olá <strong>${userData.name}</strong>,</p>
+        <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="color: #374151; margin-bottom: 15px;">👤 Dados do Respondente</h2>
+          <p><strong>Nome:</strong> ${userData.name}</p>
+          <p><strong>Email:</strong> ${userData.email}</p>
+          ${userData.company ? `<p><strong>Empresa:</strong> ${userData.company}</p>` : ''}
+        </div>
         
         <p style="color: #374151; margin-bottom: 20px;">
-          Obrigado por completar nosso diagnóstico empresarial! Seu relatório personalizado está anexado a este email.
+          Uma nova resposta do diagnóstico empresarial foi recebida com PDF anexo.
         </p>
         
         <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">

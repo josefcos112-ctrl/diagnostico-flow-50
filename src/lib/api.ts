@@ -57,7 +57,7 @@ export async function sendDiagnosticEmail(request: DiagnosticRequest): Promise<D
     console.log('Webhook triggered successfully');
     return {
       ok: true,
-      message: 'Diagnóstico enviado com sucesso!'
+      message: 'Diagnóstico enviado com sucesso! O relatório foi encaminhado para análise.'
     };
 
   } catch (error: any) {

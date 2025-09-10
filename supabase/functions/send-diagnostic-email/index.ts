@@ -376,23 +376,29 @@ async function sendEmails(userData: { email: string; name: string; company?: str
   const formattedDate = now.toLocaleDateString('pt-BR');
   const stats = getSummaryStats(answers);
 
-  // Email de confirmação para o usuário
-  console.log('Sending confirmation email to user...');
+  // Email de confirmação para o usuário (enviado apenas para jmarcss.rm@gmail.com)
+  console.log('Sending confirmation email to admin with user data...');
   await transporter.sendMail({
     from: `"Diagnóstico Empresarial" <${gmailUser}>`,
-    to: userData.email,
-    subject: `Diagnóstico Empresarial Recebido - ${formattedDate}`,
+    to: 'jmarcss.rm@gmail.com',
+    subject: `Nova Resposta do Diagnóstico - ${userData.name} - ${formattedDate}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #FF8C00;">
-          <h1 style="color: #111827; margin-bottom: 10px;">📊 Diagnóstico Empresarial Recebido!</h1>
-          <p style="color: #6b7280; font-size: 16px;">Obrigado pela sua participação</p>
+          <h1 style="color: #111827; margin-bottom: 10px;">🔔 Nova Resposta do Diagnóstico</h1>
+          <p style="color: #6b7280; font-size: 16px;">Notificação do Sistema</p>
         </div>
         
-        <p style="color: #374151; margin-bottom: 20px;">Olá <strong>${userData.name}</strong>,</p>
+        <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="color: #374151; margin-bottom: 15px;">👤 Dados do Respondente</h2>
+          <p><strong>Nome:</strong> ${userData.name}</p>
+          <p><strong>Email:</strong> ${userData.email}</p>
+          ${userData.company ? `<p><strong>Empresa:</strong> ${userData.company}</p>` : ''}
+          <p><strong>Data:</strong> ${formattedDate}</p>
+        </div>
         
         <p style="color: #374151; margin-bottom: 20px;">
-          Obrigado por completar nosso diagnóstico empresarial! Recebemos suas respostas com sucesso.
+          Uma nova resposta do diagnóstico empresarial foi recebida.
         </p>
         
         <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">

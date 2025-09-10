@@ -1,1 +1,10 @@
 project_id = "idfrnuqhhceyidlxppzu"
+
+[functions.send-diagnostic-email]
+verify_jwt = false
+
+[functions.generate-diagnostic-report]
+verify_jwt = false
+
+[functions.generate-diagnostic-pdf]
+verify_jwt = false

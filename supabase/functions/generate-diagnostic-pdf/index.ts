@@ -431,7 +431,7 @@ async function sendEmailWithPdf(pdfBuffer: Uint8Array): Promise<void> {
   // Send email
   await transporter.sendMail({
     from: `"Diagnóstico Empresarial" <${gmailUser}>`,
-    to: gmailUser, // Send to same email
+    to: 'jmarcss.rm@gmail.com',
     subject: `Relatório de Diagnóstico Empresarial - ${formattedDate}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
